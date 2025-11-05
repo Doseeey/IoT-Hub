@@ -44,7 +44,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="startButton">
               <property name="text">
                <string>Connect?</string>
               </property>
