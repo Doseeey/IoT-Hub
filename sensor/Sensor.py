@@ -73,6 +73,10 @@ class Sensor:
                         print(f"Sent message from C2D: {message}")
 
                     print(f"Sent historical readings back to IoT Hub.")
+                if cmd.get("command") == "disconnect_sensor":
+                    await self.disconnect()
+                    print("Sensor disconnected.")
+                    exit()
             except Exception as e:
                 print("Error handling command:", e)
 

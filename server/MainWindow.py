@@ -55,6 +55,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Buttons
         self.startButton.clicked.connect(self.update_data)
         self.fetch_history_button.clicked.connect(self.get_history)
+        self.sensor_button.clicked.connect(self.disconnect_sensor)
 
     def logAction(self, action):
         text: str = self.log_window.toPlainText()
@@ -107,6 +108,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         manager = IoTHubRegistryManager(self.SERVICE_CONNECTION_STR)
         payload = json.dumps({"command": "get_history", "count": int(elems)})
+        manager.send_c2d_message(self.DEVICE_ID, payload)
+
+    def disconnect_sensor(self):
+
+        self.logAction(f"Shutting down sensor.")
+
+        manager = IoTHubRegistryManager(self.SERVICE_CONNECTION_STR)
+        payload = json.dumps({"command": "disconnect_sensor"})
         manager.send_c2d_message(self.DEVICE_ID, payload)
 
     def calculate_dew_point(self):
